@@ -100,7 +100,7 @@ safechain==0.1.0
 simpleeval==0.9.13
 six==1.12.0
 sniffio==1.3.1
-SQLAlchemy @ file:///Users/smish257/Downloads/SQLAlchemy-1.4.54-cp311-cp311-macosx_10_9_universal2.whl#sha256=b05e0626ec1c391432eabb47a8abd3bf199fb74bfde7cc44a26d2b1b352c2c6e
+SQLAlchemy==1.4.54
 stack-data==0.6.3
 starlette==0.27.0
 tenacity==8.2.3
