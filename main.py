@@ -9,7 +9,7 @@ from routers import post, user, auth, like
 import models
 from database import engine, get_db
 
-# models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine) # No longer needed after we start using alembic
 app = FastAPI()
 
 

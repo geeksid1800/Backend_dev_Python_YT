@@ -31,7 +31,7 @@ def verify_access_token(token: str, credentials_exception) -> int | None:
         if user_id is None:
             raise credentials_exception
         if expiration_time < datetime.now().isoformat():
-            raise credentials_exception
+            raise jwt.ExpiredSignatureError("Signature has expired")
         return payload
     except jwt.exceptions.PyJWTError:
         raise credentials_exception
