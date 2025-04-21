@@ -1,0 +1,20 @@
+## Add to /etc/systemd/system -> create backend_dev.service
+## Enable to run this service at startup using `sudo systemctl enable backend_dev`
+## Start using `sudo systemctl start backend_dev`
+## Monitor using `sudo systemctl status backend_dev`
+
+
+[Unit]
+Description=demo fastapi application
+After=network.target
+
+[Service]
+User=geeksid
+Group=geeksid
+WorkingDirectory=/home/geeksid/Backend_dev_Python_YT/src
+Environment="PATH=/home/geeksid/.pyenv/versions/Backend_env/bin"
+EnvironmentFile=/home/geeksid/.env
+ExecStart=/home/geeksid/.pyenv/versions/Backend_env/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
