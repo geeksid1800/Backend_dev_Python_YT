@@ -1,0 +1,29 @@
+services:
+  api:
+    image: geeksid1800/backend_dev_yt
+    depends_on:
+      - postgres-service
+    ports: 
+      - 8000:8000
+    #env_file:
+    #  - ./.env
+    environment:
+      - db_type=${db_type}
+      - db_username=${db_username}
+      - db_password=${db_password}
+      - db_hostname=postgres-service #the service that we have named below
+      - db_port=${db_port}
+      - db_name=${db_name}
+      - JWT_secret_key=${JWT_secret_key}
+
+    # command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload #Overrides the default CMD in dockerfile
+  postgres-service:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=iEnable@123
+      - POSTGRES_DB=fastapi
+    volumes:
+      - postgres-db:/var/lib/postgresql/data #This is where postgres stores the data in our container
+
+volumes:
+  postgres-db: #create a volume to store the data in postgres-db location before
