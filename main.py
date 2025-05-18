@@ -37,7 +37,7 @@ app.add_middleware( # Allows requests from domains on other servers. Important i
 
 @app.get("/")
 def home() -> dict[str, str]:
-    return {"message": "Hello world"}
+    return {"message": "Hello world from docker"}
 
 app.include_router(post.router) #Include the router object from post.py, so it goes through all the path operations defined for it sequentially when we get a request
 app.include_router(user.router)

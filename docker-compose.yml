@@ -1,0 +1,30 @@
+services:
+  api:
+    build: . #you want code from current directory to build this image
+    depends_on:
+      - postgres-service
+    ports: 
+      - 8000:8000
+    #env_file:
+    #  - ./.env
+    environment:
+      - db_type=postgresql
+      - db_username=postgres
+      - db_password=iEnable@123
+      - db_hostname=postgres-service #the service that we have named below
+      - db_port=5432
+      - db_name=fastapi
+      - JWT_secret_key=a5100f3abb97ce862a503aad483abf6061b1e72f71bde37b91330cb8303fff8e
+    volumes:
+      - ./:/usr/src/app:ro #local directory:container directory to keep in sync with local:read-only
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload #Overrides the default CMD in dockerfile
+  postgres-service:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=iEnable@123
+      - POSTGRES_DB=fastapi
+    volumes:
+      - postgres-db:/var/lib/postgresql/data #This is where postgres stores the data in our container
+
+volumes:
+  postgres-db: #create a volume to store the data in postgres-db location before
